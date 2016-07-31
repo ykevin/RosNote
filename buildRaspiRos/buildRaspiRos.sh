@@ -1,7 +1,7 @@
 #!/bin/bash
 
 cd ~
-echo "添加源，并更新系统"
+echo  "添加源，并更新系统"
 sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu jessie main" > /etc/apt/sources.list.d/ros-latest.list'
 wget https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -O - | sudo apt-key add -
 
@@ -23,7 +23,8 @@ echo "增加系统交换分区,16GB分2GB的交换分区"
 sudo dd if=/dev/zero of=/swap bs=1M count=2048
 sudo mkswap /swap
 sudo swapon /swap
-sudo echo "/swap           none            swap    sw                0       0" >> /etc/fstab 
+echo "需要手工编辑/etc/fstab文件，将'/swap           none            swap    sw                0       0'添加进去"
+#sudo echo "/swap           none            swap    sw                0       0" >> /etc/fstab 
 
 echo "建立ros工作空间"
 mkdir ~/ros_catkin_ws
