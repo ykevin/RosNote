@@ -32,7 +32,7 @@ cd ~/ros_catkin_ws
 echo "获取相关包的源代码到工作目录"
 rosinstall_generator desktop --rosdistro indigo --deps --wet-only --exclude roslisp --tar > indigo-desktop-wet.rosinstall
 #rosinstall_generator desktop --rosdistro indigo --deps --wet-only --exclude roslisp collada_parser collada_urdf --tar > indigo-desktop-wet.rosinstall
-wstool init -j4 src indigo-robot-wet.rosinstall
+wstool init -j4 src indigo-desktop-wet.rosinstall
 
 
 echo "解决ROS GUI版本所需要的依赖问题"
@@ -75,5 +75,6 @@ cd  ~/ros_catkin_ws
 rosdep install --from-paths src --ignore-src --rosdistro indigo -y -r --os=debian:jessie
 
 echo "编译相关ROS 包"
+cd  ~/ros_catkin_ws
 sudo ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/indigo 
 
