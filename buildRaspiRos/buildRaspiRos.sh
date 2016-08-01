@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "树莓派系统为官方最新的系统，下载连接为：http://vx2-downloads.raspberrypi.org/raspbian/images/raspbian-2016-05-31/2016-05-27-raspbian-jessie.zip， 如果用其它以前版本编译可能会存在编译错误"
+
 cd ~
 echo  "添加源，并更新系统"
 sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu jessie main" > /etc/apt/sources.list.d/ros-latest.list'
@@ -23,8 +25,9 @@ echo "增加系统交换分区,16GB分2GB的交换分区"
 sudo dd if=/dev/zero of=/swap bs=1M count=2048
 sudo mkswap /swap
 sudo swapon /swap
-echo "需要手工编辑/etc/fstab文件，将'/swap           none            swap    sw                0       0'添加进去"
-#sudo echo "/swap           none            swap    sw                0       0" >> /etc/fstab 
+sudo chmod 777 /etc/fstab
+#echo "需要手工编辑/etc/fstab文件，将'/swap           none            swap    sw                0       0'添加进去"
+sudo echo "/swap           none            swap    sw                0       0" >> /etc/fstab 
 
 echo "建立ros工作空间"
 mkdir ~/ros_catkin_ws
@@ -39,31 +42,31 @@ echo "用rosdep解决其它依赖问题"
 cd  ~/ros_catkin_ws
 rosdep install --from-paths src --ignore-src --rosdistro indigo -y -r --os=debian:jessie
 
-echo "解决ROS GUI版本所需要的依赖问题"
-mkdir ~/ros_catkin_ws/external_src
+#echo "解决ROS GUI版本所需要的依赖问题"
+#mkdir ~/ros_catkin_ws/external_src
 
-cd ~/ros_catkin_ws/external_src
-sudo apt-get build-dep console-bridge
-apt-get source -b console-bridge
-sudo dpkg -i libconsole-bridge0.2*.deb libconsole-bridge-dev_*.deb
+#cd ~/ros_catkin_ws/external_src
+#sudo apt-get build-dep console-bridge
+#apt-get source -b console-bridge
+#sudo dpkg -i libconsole-bridge0.2*.deb libconsole-bridge-dev_*.deb
 
-cd ~/ros_catkin_ws/external_src
-apt-get source -b lz4
-sudo dpkg -i liblz4-*.deb
+#cd ~/ros_catkin_ws/external_src
+#apt-get source -b lz4
+#sudo dpkg -i liblz4-*.deb
 
-echo "编译提示按enter键，到有选项提示时，选择2， 将包名改为liburdfdom-headers-dev, 接下来的两个问题连续选择'n'， 否则会编译出错"
-cd ~/ros_catkin_ws/external_src
-git clone https://github.com/ros/urdfdom_headers.git
-cd urdfdom_headers
-cmake .
-sudo checkinstall make install
+#echo "编译提示按enter键，到有选项提示时，选择2， 将包名改为liburdfdom-headers-dev, 接下来的两个问题连续选择'n'， 否则会编译出错"
+#cd ~/ros_catkin_ws/external_src
+#git clone https://github.com/ros/urdfdom_headers.git
+#cd urdfdom_headers
+#cmake .
+#sudo checkinstall make install
 
-echo "编译提示按enter键，到有选项提示时，选择2， 将包名改为liburdfdom-dev, 接下来的两个问题连续选择'n'， 否则会编译出错"
-cd ~/ros_catkin_ws/external_src
-git clone https://github.com/ros/urdfdom.git
-cd urdfdom
-cmake .
-sudo checkinstall make install 
+#echo "编译提示按enter键，到有选项提示时，选择2， 将包名改为liburdfdom-dev, 接下来的两个问题连续选择'n'， 否则会编译出错"
+#cd ~/ros_catkin_ws/external_src
+#git clone https://github.com/ros/urdfdom.git
+#cd urdfdom
+#cmake .
+#sudo checkinstall make install 
 
 #echo "编译提示按enter键，到有选项提示时，选择2， 将包名改为collada-dom-dev, 接下来的两个问题连续选择'n'， 否则会编译出错"
 #cd ~/ros_catkin_ws/external_src
