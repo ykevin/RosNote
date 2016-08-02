@@ -1,0 +1,15 @@
+--- mesh_loader.cpp	2016-08-02 08:43:32.982451003 +0800
++++ mesh_loader.cpp.patch	2016-08-02 08:43:11.592538304 +0800
+@@ -67,6 +67,12 @@
+ #include <assimp/IOSystem.h>
+ #endif
+ 
++#ifdef __arm__
++bool Assimp::IOSystem::ComparePaths(const char *p1, const char *p2) const
++{
++   return !::strcasecmp(p1,p2);
++}
++#endif
+ 
+ namespace fs = boost::filesystem;
+ 

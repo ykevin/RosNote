@@ -2,6 +2,8 @@
 
 echo "树莓派系统为官方最新的系统，下载连接为：http://vx2-downloads.raspberrypi.org/raspbian/images/raspbian-2016-05-31/2016-05-27-raspbian-jessie.zip， 如果用其它以前版本编译可能会存在编译错误"
 
+DIR=$(pwd)
+
 cd ~
 echo  "添加源，并更新系统"
 sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu jessie main" > /etc/apt/sources.list.d/ros-latest.list'
@@ -76,7 +78,18 @@ rosdep install --from-paths src --ignore-src --rosdistro indigo -y -r --os=debia
 #cmake .
 #sudo checkinstall make install
 
+echo "打上编译错误补丁"
+patch_dir="/home/pi/ros_catkin_ws/src/rviz/src/rviz/"
+patch_file="~/ros_catkin_ws/src/rviz/src/rviz/mesh_loader.cpp"
+if [ ! -f "$patch_file" ] ; then
+    sudo cp $DIR/rviz_mesh_loader.patch $patch_dir
+    cd $patch_dir
+    patch -p0 < rviz_mesh_loader.patch  
+fi
+
 echo "编译相关ROS 包"
 cd  ~/ros_catkin_ws
 sudo ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/indigo 
 
+echo "写入环境变量"
+echo "source /opt/ros/indigo/setup.bash" >> ~/.bashrc
