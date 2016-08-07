@@ -1,0 +1,15 @@
+--- collada_urdf.cpp.orig	2016-08-07 16:14:32.210449174 +0800
++++ collada_urdf.cpp	2016-08-07 16:14:10.790519171 +0800
+@@ -87,6 +87,12 @@
+ 
+ using namespace std;
+ 
++#ifdef __arm__
++bool Assimp::IOSystem::ComparePaths(const char *p1, const char *p2) const
++{
++    return !::strcasecmp(p1, p2);
++}
++#endif
+ 
+ 
+ namespace ColladaDOM150 { }
