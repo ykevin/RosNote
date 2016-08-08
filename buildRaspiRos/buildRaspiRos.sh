@@ -36,7 +36,7 @@ mkdir ~/ros_catkin_ws
 cd ~/ros_catkin_ws
 
 echo "获取相关包的源代码到工作目录"
-rosinstall_generator desktop navigation move_base amcl map-server  nav-core --rosdistro indigo --deps --wet-only --exclude roslisp --tar > indigo-desktop-wet.rosinstall
+rosinstall_generator desktop navigation move_base amcl rosserial gmapping --rosdistro indigo --deps --wet-only --exclude roslisp --tar > indigo-desktop-wet.rosinstall
 wstool init  src indigo-desktop-wet.rosinstall
 
 echo "用rosdep解决其它依赖问题"

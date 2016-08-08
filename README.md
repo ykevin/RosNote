@@ -9,7 +9,7 @@ Ros Note
 ---------------------------
 * $./buildRaspiRos
 
-* 注意:编译额外urdfdom_headers、urdfdom、collada-dom时要注意说明按要求来编译
+* 注意:请按要求的版本与硬件环境来编译
 
 
 
