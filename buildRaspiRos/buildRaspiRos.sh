@@ -15,7 +15,10 @@ sudo apt-get update
 sudo apt-get -y upgrade
 
 echo "下载所需要的依赖包"
-sudo apt-get -y install git vim python-pip python-setuptools python-yaml python-distribute python-docutils python-dateutil python-six python-empy checkinstall cmake libboost-all-dev libtinyxml-dev libxml2-dev build-essential
+sudo apt-get -y install git vim python-pip python-setuptools python-yaml python-distribute python-docutils python-dateutil python-six python-empy checkinstall cmake libboost-all-dev libtinyxml-dev libxml2-dev build-essential ttf-wqy-microhei 
+
+echo "解决中文字体乱码问题"
+sudo fc-cache
 
 sudo pip install rosdep rosinstall_generator wstool rosinstall
 
