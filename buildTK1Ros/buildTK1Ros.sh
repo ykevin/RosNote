@@ -114,8 +114,9 @@ echo "$(tput setaf 2)Drivers and Modules copied. "
 echo "Please Modify /etc/rc.local as appropriate$(tput setaf 7)"
 
 echo "install turtlebot2"
-sudo apt-get install -y ros-indigo-turtlebot ros-indigo-turtlebot-apps ros-indigo-turtlebot-interactions  ros-indigo-kobuki-ftdi ros-indigo-rocon-remocon ros-indigo-rocon-qt-library ros-indigo-ar-track-alvar-msgs
+sudo apt-get install -y ros-indigo-turtlebot ros-indigo-turtlebot-apps ros-indigo-turtlebot-interactions  ros-indigo-kobuki-ftdi ros-indigo-rocon-remocon ros-indigo-rocon-qt-library ros-indigo-ar-track-alvar-msgs ros-indigo-collada-urdf ros-indigo-navigation ros-indigo-slam-gmapping
 
-sudo ./opt/ros/indigo/setup.bash
+sudo chown ubuntu .ros/
+source ./opt/ros/indigo/setup.bash
 
 rosrun kobuki_ftdi create_udev_rules 
