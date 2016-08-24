@@ -27,8 +27,8 @@ sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu trusty main" > /etc/apt
 # Setup keys
 wget https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -O - | sudo apt-key add -
 
-apt-get update
-apt-get install libncurses5-dev -y
+sudo apt-get update
+sudo apt-get install  bash-completion command-not-found libncurses5-dev -y
 sudo apt-get install ros-indigo-ros-base -y
 # Add Individual Packages here
 # You can install a specific ROS package (replace underscores with dashes of the package name):
@@ -103,12 +103,19 @@ sudo cp -v ~/builtModulesAndDrivers/builtModules/mac80211.ko /lib/modules/$(unam
 # Update wireless module - cfg80211.ko
 sudo cp -v ~/builtModulesAndDrivers/builtModules/cfg80211.ko /lib/modules/$(uname -r)/kernel/net/wireless
 # After compilation, copy the compiled module to the system area
-cp drivers/usb/serial/ftdi_sio.ko /lib/modules/$(uname -r)/kernel/drivers/usb/serial
+cd /usr/src/kernel
+sudo cp -v drivers/usb/serial/ftdi_sio.ko /lib/modules/$(uname -r)/kernel/drivers/usb/serial
 
 depmod -a
-apt-get install linux-firmware -y
+sudo apt-get install linux-firmware -y
 /bin/echo -e "\e[1;32mFTDI Driver Module Installed.\e[0m"
 # output completion message in green
 echo "$(tput setaf 2)Drivers and Modules copied. "
 echo "Please Modify /etc/rc.local as appropriate$(tput setaf 7)"
 
+echo "install turtlebot2"
+sudo apt-get install -y ros-indigo-turtlebot ros-indigo-turtlebot-apps ros-indigo-turtlebot-interactions  ros-indigo-kobuki-ftdi ros-indigo-rocon-remocon ros-indigo-rocon-qt-library ros-indigo-ar-track-alvar-msgs
+
+sudo ./opt/ros/indigo/setup.bash
+
+rosrun kobuki_ftdi create_udev_rules 
