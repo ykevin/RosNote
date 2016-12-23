@@ -39,7 +39,7 @@ mkdir ~/ros_catkin_ws
 cd ~/ros_catkin_ws
 
 echo "获取相关包的源代码到工作目录"
-rosinstall_generator desktop navigation move_base amcl rosserial gmapping --rosdistro indigo --deps --wet-only --exclude roslisp --tar > indigo-desktop-wet.rosinstall
+rosinstall_generator desktop navigation move_base amcl rosserial gmapping teleop_twist_keyboard --rosdistro indigo --deps --wet-only --exclude roslisp --tar > indigo-desktop-wet.rosinstall
 wstool init  src indigo-desktop-wet.rosinstall
 
 echo "用rosdep解决其它依赖问题"
@@ -71,3 +71,13 @@ sudo ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release 
 
 echo "写入环境变量"
 echo "source /opt/ros/indigo/setup.bash" >> ~/.bashrc
+source ~/.bashrc
+
+echo "install user ros ws and  ros_arduino_bridge"
+mkdir ~/catkin_ws/src/ -p
+cd ~/catkin_ws/src/ 
+git clone https://github.com/hbrobotics/ros_arduino_bridge.git
+cd ..
+catkin_make 
+
+echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
