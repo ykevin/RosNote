@@ -1,6 +1,6 @@
-#修改/usr/share/X11/xorg.conf.d/10-evdev.conf 增加
+# 修改/usr/share/X11/xorg.conf.d/10-evdev.conf 增加
 
-Section "InputClass"
+> Section "InputClass"
     Identifier "joystick catchall"
     MatchIsJoystick "on"
     MatchDevicePath "/dev/input/event*"
