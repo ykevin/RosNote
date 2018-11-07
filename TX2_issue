@@ -1,3 +1,9 @@
 ### upload system
 1.download mainfinest failed
 > NV_DEVTOOLS_FORBID_MULTIPLE_DOWNLOAD_THREADS=1
+
+2.TX2 time sync
+> sudo apt-get install ntpdate
+> sudo ntpdate ntp.api.bz
+> sudo hwclock -w
+
