@@ -1,4 +1,4 @@
-Éı¼¶liunxÇı¶¯
+ubuntu18.04 åˆå§‹åŒ–æ˜¾å¡é©±åŠ¨
 conda create -n tfgpu python=3.6 
 conda install tensorflow-gpu=1.15
 conda install Pillow
