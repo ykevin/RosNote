@@ -1,0 +1,5 @@
+Éý¼¶liunxÇý¶¯
+conda create -n tfgpu python=3.6 
+conda install tensorflow-gpu=1.15
+conda install Pillow
+conda install matplotlib
